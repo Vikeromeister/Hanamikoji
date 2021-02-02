@@ -1,6 +1,8 @@
 import random
 import os
 from termcolor import cprint
+from tkinter import *
+from PIL import ImageTk, Image
 
 class Player:
 
@@ -16,9 +18,31 @@ class Player:
         self.score = 0
         self.name = name
 
-class Hanamikoji:
+class Hanamikoji():
 
-    def __init__(self):
+    def __init__(self, master=None):
+        # super().__init__(master)
+        # self.master = master
+        # self.pack()
+
+        # self.hi_there = Button(self)
+        # self.hi_there["text"] = "Hello World\n(click me)"
+        # self.hi_there["command"] = self.deal
+        # self.hi_there.pack(side="top")
+
+        # self.quit = Button(self, text="QUIT", fg="red",
+        #                       command=self.master.destroy)
+        # self.quit.pack(side="bottom")
+
+        # img = Image.open("Resources/Geisha1.jpeg")
+        # imago = ImageTk.PhotoImage(img)
+        # self.geishaOne = Label(image=imago)
+        # self.geishaOne.image = imago
+        # self.geishaOne.pack
+        # self.img = ImageTk.PhotoImage(Image.open("Resources/Geisha1.jpeg"))
+        # geishaOne.create_image(image=self.img)
+
+    
         self.playerhand = []
         self.deck = [1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 7]
         random.shuffle(self.deck)
@@ -213,15 +237,40 @@ class Hanamikoji:
             self.card(card)
             print()
 
+class Application(Frame):
+    def __init__(self, master=None):
+        super().__init__(master)
+        self.master = master
+        self.pack()
+
+        self.hi_there = Button(self)
+        self.hi_there["text"] = "Hello World\n(click me)"
+        self.hi_there["command"] = self.say_hi
+        self.hi_there.pack(side="top")
+
+        self.quit = Button(self, text="QUIT", fg="red",
+                              command=self.master.destroy)
+        self.quit.pack(side="bottom")
+
+    def say_hi(self):
+        print("hi there, everyone!")
+
+
 if __name__ == '__main__':
-    print("Hi and welcome to Hanamikoji!\n")
-    while True:
-        game = Hanamikoji()
-        game.deal()
-        for i in range(4):
-            game.turn(game.player_one)
-            game.turn(game.player_two)
-        game.endgame()
+
+    root = Tk()
+    root.title("Hanamikoji")
+    root.configure(width = 1000, height = 800)
+    # oreg = Application(master=root)
+    # oreg.mainloop()
+    game = Hanamikoji()
+    game.deal
+    # game.mainloop()
+
+    for i in range(4):
+        game.turn(game.player_one)
+        game.turn(game.player_two)
+    game.endgame()
         
         
 
